@@ -1,0 +1,18 @@
+do:
+  ignores:
+  - '.old'
+  - '.back'
+  - .git
+  - .vs
+  - .vscode
+  - .obsidian
+  import: False
+  number-level: 2
+  convert-to: .html
+  tab-size: 4
+  css: ./css/markdown7.css
+  verbose: False
+folders:
+  source: .
+  build: ../../OBS_build
+  deploy: ../../OBS_deploy
