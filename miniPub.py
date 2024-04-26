@@ -290,7 +290,7 @@ def convert_markdown_to_html(source_file, build_file):
 
     remark.clear_levels()
     markdown_text = remark.get_md(source_file)
-    with open(source_file + '.markdown', 'w', encoding='utf-8') as f:
+    with open(build_file + '.markdown', 'w', encoding='utf-8') as f:
          f.write(markdown_text)
 
     header = f'''
