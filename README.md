@@ -25,3 +25,5 @@ miniPublisher for obsidian: convert .md files to .html including obsidian tags a
 # TODO
 
 - callout: https://docs.readme.com/rdmd/docs/callouts
+
+github merge request conflict testing....
