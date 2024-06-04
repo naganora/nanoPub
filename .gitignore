@@ -1,6 +1,8 @@
 .*/
 *.md/
+#*/
 sample*/
 test/
 *.bak
 unused.csv
+.DS_Store
