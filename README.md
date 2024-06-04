@@ -24,4 +24,5 @@ This one in on developing.
 # TODO
 
 - callout: https://docs.readme.com/rdmd/docs/callouts
-- figure and table numbering
+
+github merge request conflict testing....
