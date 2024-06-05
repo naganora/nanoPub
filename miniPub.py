@@ -2,12 +2,12 @@
 
 #-*- coding: utf-8 -*-'
 
-## @markdown
-# TODO: 
-# - read YFM and apply scoped configure.
-# - add CallOut
-# - add .proto
-## markdown@ 
+### # TODO: 
+###
+### - read YFM and apply scoped configure.
+### - add CallOut
+### + line markdown
+###
         
 import unittest
 import argparse
@@ -162,13 +162,13 @@ class ReMarkdown:
                 # service block
                 m = self.re_proto_services.search(line)
                 if m:
+                    anker = f'service_{pkg_name}'
+                    w.write(f'\n<p id="{anker}"></p>')
                     w.write(f'\n## Service {m[1]}\n\n')
                     w.write(f'{m[2]}\n\n')
                     # if need more descrion +++
                     th = f'|end point|desc|\n'
                     th += f'|---------|----|\n'
-                    # w.write(')
-                    # w.write(f'|---------|----|\n')
                 m = self.re_proto_service.search(line)
                 if m:
                     if th:
@@ -187,12 +187,9 @@ class ReMarkdown:
                 m = self.re_proto_messages.search(line)
                 if m:
                     anker = f'{pkg_name}_{m[1].lower()}'
-                    w.write(f'<p id="{anker}"></p>')
+                    w.write(f'\n<p id="{anker}"></p>')
                     w.write(f'\n## {m[1]}\n\n')
                     w.write(f'{m[2]}\n\n')
-                    # if need more descrion +++
-                    # w.write(f'|seq|type|name|desc|\n')
-                    # w.write(f'|:-:|----|----|----|\n')
                     th = f'|seq|type|name|desc|\n'
                     th += f'|:-:|----|----|----|\n'
                 m = self.re_proto_message.search(line)
@@ -202,20 +199,6 @@ class ReMarkdown:
                         th = ''
                     w.write(f'|{m[3]}|{m[1]}|{m[2]}|{m[4]}|\n')
 
-                # markdown block - SHOULD BE DEPRICATED
-                # if self.re_markdown_end.match(line):
-                #     markdown = False
-                # if markdown == True:
-                #     line = line.replace('\t', ' '*int(tab_size))
-                #     line = line[left_spaces:512]   # ++++ LINE SEP ????
-                #     if len(line) == 0:
-                #         line = os.linesep
-                #     w.write(line)
-                # if self.re_markdown_begin.match(line):
-                #     m = self.re_markdown_begin.match(line)
-                #     left_spaces = len(m[1].replace('\t', ' '*4))
-                #     markdown = True
-             
                 # markdown line
                 m = self.re_markdown_line.search(line)
                 if m:
@@ -223,8 +206,8 @@ class ReMarkdown:
 
                 m = self.re_proto_package.search(line)
                 if m:
-                    pkg_name = m[1]
-                    w.write(f'\n# {pkg_name}\n')                    
+                    pkg_name = m[1].lower()
+                    w.write(f'\n# {m[1]}\n')                    
     
     def gen_embed_genneral2md(self, src, md) -> str:
         """
@@ -408,7 +391,7 @@ def convert_markdown_to_html(source_file, build_file):
     markdown_text = remark.get_md(source_file)
 
     # write a file for debugging
-    with open(build_file + '.markdown', 'w', encoding='utf-8') as f:
+    with open(title + '.markdown', 'w', encoding='utf-8') as f:
          f.write(markdown_text)
 
     header = f'''
