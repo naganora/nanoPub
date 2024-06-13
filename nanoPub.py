@@ -407,6 +407,40 @@ def convert_markdown_to_html(source_file, build_file):
     <body>
     '''
 
+    header2 = '''
+    <!doctype html>
+    <html>
+    <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimal-ui">
+    <title>GitHub Markdown CSS demo</title>
+    <meta name="color-scheme" content="light dark">
+    <link rel="stylesheet" href="css/github-markdown.css">
+    <style>
+                body {
+                    box-sizing: border-box;
+                    min-width: 200px;
+                    max-width: 980px;
+                    margin: 0 auto;
+                    padding: 45px;
+                }
+
+                @media (prefers-color-scheme: dark) {
+                    body {
+                        background-color: #0d1117;
+                    }
+                }
+            </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/github-fork-ribbon-css/0.2.3/gh-fork-ribbon.min.css">
+    <style>
+                .github-fork-ribbon:before {
+                    background-color: #121612;
+                }
+            </style>
+    </head>
+    <body>
+    '''    
+
     tailer = r'''
     </body>
     </html>
@@ -548,9 +582,14 @@ if __name__ == '__main__':
                 warn('Check: ', 'Unused links')
                 print(f'Unused Dic: {len(links_unused)} / {len(links)}, Check {unused}')
                 pretty_dics(links_unused)
+                length = 0
                 with open(unused,'w', encoding='utf-8-sig') as f:
                     for key, value in links_unused.items():
                         f.write(f'{value}, {key}\n')
+                        length = max(length, len(value))
+                length += 1
+                for key, value in links_unused.items():
+                    print(f'{value:<{length}}, {key}')
         elif args.command == 'clean':
             clean(args.build)
         elif args.command == 'test':
