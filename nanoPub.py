@@ -552,7 +552,7 @@ class Test(unittest.TestCase):
 
 if __name__ == '__main__':
     cwd = os.path.dirname(__file__)
-    with open(f'{cwd}/miniPub.yml') as f:
+    with open(f'{cwd}/nanoPub.yml') as f:
         options = yaml.load(f, Loader=yaml.FullLoader)
         # print('Options:\n', yaml.dump(options, default_flow_style=False))
 
